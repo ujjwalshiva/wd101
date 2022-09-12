@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Registration Form With Validation</title>
   </head>
   <body>
@@ -12,35 +12,21 @@
       <form class="form" id="form">
         <h2 align="center">Assignment - Registration Form</h2>
 
-        <table class="tableForm" cellspacing="25px">
+        <table class="tableForm" cellspacing="50px">
           <tr>
-            <td><label for="name">Name :</label></td>
+            <td><label for="name">Name:</label></td>
             <td>
-              <input
-                class="input"
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Full Name"
-                required
-              />
+              <input class="input" type="text" name="name" id="name" placeholder="Full Name" required />
             </td>
           </tr>
           <tr>
-            <td><label for="email">E-mail :</label></td>
+            <td><label for="email">E-mail:</label></td>
             <td>
-              <input
-                class="input"
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                required
-              />
+              <input class="input" type="text" name="email" id="email" placeholder="Email" required />
             </td>
           </tr>
           <tr>
-            <td><label for="name">Password :</label></td>
+            <td><label for="name">Password:</label></td>
             <td>
               <input
                 class="input"
@@ -53,10 +39,10 @@
             </td>
           </tr>
           <tr>
-            <td><label for="dob">Date Of Birth :</label></td>
+            <td><label for="dob">Date Of Birth:</label></td>
             <td>
               <input
-                style="width: 220px"
+                style="width: 180px"
                 class="input"
                 type="date"
                 name="dob"
@@ -88,11 +74,8 @@
   <script>
     let form = document.getElementById("form");
 
-    // localStorage.clear();
-    // let Entries = [];
-
-    const retriveEntries = () => {
-      let entries = localStorage.getItem("userEntry");
+    const retrieveEntries = () => {
+      let entries = localStorage.getItem("entered_value");
 
       if (entries) {
         entries = JSON.parse(entries);
@@ -102,10 +85,10 @@
       return entries;
     };
 
-    let Entries = retriveEntries();
+    let Entries = retrieveEntries();
 
     const displayEntries = () => {
-      const entries = retriveEntries();
+      const entries = retrieveEntries();
 
       const rows = entries
         .map((entry) => {
@@ -122,7 +105,6 @@
 
       let tableDiv = document.getElementById("tableDiv");
 
-      // <th class="th">Name</th> inside oneMore head for name
       tableDiv.innerHTML = `<table class="table" border="2">
       <tr>
         <th class="th">Name</th>
@@ -135,7 +117,6 @@
       </table>`;
     };
 
-    // const saveUserFrom = () => {
     const saveUserFrom = (event) => {
       event.preventDefault();
 
@@ -155,7 +136,7 @@
 
       Entries.push(entry_obj);
 
-      localStorage.setItem("userEntry", JSON.stringify(Entries));
+      localStorage.setItem("entered_value", JSON.stringify(Entries));
 
       displayEntries();
     };
@@ -178,9 +159,9 @@
       return age;
     }
 
-    let dateELE = document.getElementById("dob");
+    let dateElements = document.getElementById("dob");
 
-    dateELE.addEventListener("change", () => {
+    dateElements.addEventListener("change", () => {
       let [year, month, date] = document.getElementById("dob").value.split("-");
 
       let dob = new Date(year, month, date);
@@ -188,13 +169,13 @@
 
       age = getAge(Today, dob);
 
-      dateELE.style.border = "2px solid rgba(0, 0, 0, 0.4)";
+      dateElements.style.border = "3px solid rgba(0, 0, 0, 0.4)";
       if (age < 18 || age > 55) {
-        dateELE.setCustomValidity("Your age is not lies between 18 and 55");
-        dateELE.style.border = "2px solid red";
+        dateElements.setCustomValidity("Your age is not lies between 18 and 55");
+        dateElements.style.border = "2px solid red";
         return;
       } else {
-        dateELE.setCustomValidity("");
+        dateElements.setCustomValidity("");
       }
     });
 
@@ -204,7 +185,7 @@
 
     function validate(ele) {
       if (ele.validity.typeMismatch) {
-        ele.setCustomValidity("The Email is not in the right format!!!");
+        ele.setCustomValidity("This Email is found not be in correct format");
         ele.reportValidity();
       } else {
         ele.setCustomValidity("");
