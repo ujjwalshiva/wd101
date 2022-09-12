@@ -22,7 +22,7 @@
           <tr>
             <td><label for="email">E-mail:</label></td>
             <td>
-              <input class="input" type="text" name="email" id="email" placeholder="Email" required />
+              <input class="input" type="email" name="email" id="email" placeholder="Email" required />
             </td>
           </tr>
           <tr>
@@ -185,7 +185,8 @@
 
     function validate(ele) {
       if (ele.validity.typeMismatch) {
-        ele.setCustomValidity("This Email is found not be in correct format");
+        ele.setCustomValidity("This Email is not in correct format");
+        dateElements.style.border = "2px solid red";
         ele.reportValidity();
       } else {
         ele.setCustomValidity("");
